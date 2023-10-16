@@ -11,7 +11,7 @@ jobs:
   sync-prismic-prd:
     name: Sync Prismic Production Environment
     # environment: production
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Run Hello World
         run: echo "Hello, World! This is a custom action."

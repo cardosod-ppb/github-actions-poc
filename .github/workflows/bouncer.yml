@@ -9,7 +9,7 @@ on:
 jobs:
   dependencies:
     name: Install Dependencies
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
 
   commitlint:
     name: Check Commit Messages
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
   check-code-style:
     name: Check Code Style
     needs: dependencies
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -50,7 +50,7 @@ jobs:
   validate-models:
     name: Validate Models
     needs: dependencies
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -64,7 +64,7 @@ jobs:
   check-generated-files:
     name: Check Generated Files
     needs: dependencies
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -89,7 +89,7 @@ jobs:
   preview-release-notes:
     name: Preview Release Notes
     needs: dependencies
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     if: github.event.pull_request.number
     steps:
       - name: Checkout Repository
@@ -133,7 +133,7 @@ jobs:
   check-breaking-changes:
     name: Check Breaking Changes
     needs: dependencies
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout PR Branch
         uses: actions/checkout@v3
@@ -146,7 +146,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.base_ref }}
-          path: './base-branch'
+          path: "./base-branch"
 
       - name: Install Dependencies
         uses: ./.github/actions/install-dependencies

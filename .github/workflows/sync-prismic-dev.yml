@@ -14,7 +14,7 @@ jobs:
     name: Sync Prismic Development Environment
     environment: development
     needs: release
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3

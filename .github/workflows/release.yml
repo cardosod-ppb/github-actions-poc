@@ -15,7 +15,7 @@ jobs:
     name: Publish Release
     environment: release
     needs: bouncer
-    runs-on: centos-self-hosted
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
