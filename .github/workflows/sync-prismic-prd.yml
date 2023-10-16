@@ -1,16 +1,16 @@
-name: Execute Job on Non-Master Branch
+name: My Workflow
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: "Branch Name"
-        required: true
 
 jobs:
-  execute-on-non-master:
+  my_job:
     runs-on: ubuntu-latest
-    if: github.event.inputs.branch != 'master'
+
     steps:
-      - name: Execute Job on Non-Master Branch
-        run: echo "This job runs on a non-master branch."
+      - name: First Step
+        if: github.ref_name == 'master'
+        run: exit 1
+
+      - name: Next Step
+        run: echo "This step will only run if the branch is not master."
