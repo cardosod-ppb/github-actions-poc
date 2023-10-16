@@ -1,29 +1,16 @@
-name: Sync Prismic Production
+name: Execute Job on Non-Master Branch
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: Sync Prismic Production Environment
-    types: requested
-    branches-ignore: master
+    inputs:
+      branch:
+        description: "Branch Name"
+        required: true
 
 jobs:
-  sync-prismic-prd:
-    name: Sync Prismic Production Environment
-    # environment: production
+  execute-on-non-master:
     runs-on: ubuntu-latest
+    if: github.event.inputs.branch != 'master'
     steps:
-      - name: Run Hello World
-        run: echo "Hello, World! This is a custom action."
-
-      # - name: Checkout
-      #   uses: actions/checkout@v3
-
-      # - name: Install Dependencies
-      #   uses: ./.github/actions/install-dependencies
-
-      # - name: Sync Prismic
-      #   uses: ./.github/actions/sync-prismic
-      #   with:
-      #     custom-types-api-token: ${{ secrets.CUSTOM_TYPES_API_TOKEN }}
-      #     prismic-repository: ${{ vars.PRISMIC_REPOSITORY }}
+      - name: Execute Job on Non-Master Branch
+        run: echo "This job runs on a non-master branch."
