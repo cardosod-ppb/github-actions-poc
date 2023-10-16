@@ -1,0 +1,8 @@
+name: Check Breaking Change Commit
+description: Check if there is a commit signaled with a breaking change and break if it is not found
+runs:
+  using: composite
+  steps:
+    - name: Check if there is a breaking change commit
+      shell: bash
+      run: sh ./tools/scripts/check-breaking-change-commit.sh

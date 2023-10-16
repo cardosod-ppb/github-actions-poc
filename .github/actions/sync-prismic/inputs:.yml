@@ -1,0 +1,18 @@
+inputs:
+  custom-types-api-token:
+    description: Custom Types API Token
+    required: true
+  prismic-repository:
+    description: Prismic Repository
+    required: true
+name: Sync Prismic
+description: Sync Prismic
+runs:
+  using: composite
+  steps:
+    - name: Sync Prismic
+      shell: bash
+      env:
+        PRISMIC_REPOSITORY: ${{ inputs.prismic-repository }}
+        CUSTOM_TYPES_TOKEN: ${{ inputs.custom-types-api-token }}
+      run: npm run push-prismic-models

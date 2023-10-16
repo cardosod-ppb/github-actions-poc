@@ -1,0 +1,42 @@
+# See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
+name: Release
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  bouncer:
+    name: Bouncer Inspection
+    uses: ./.github/workflows/bouncer.yml
+
+  release:
+    name: Publish Release
+    environment: release
+    needs: bouncer
+    runs-on: centos-self-hosted
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set NPM Config
+        run: npm config set //npm.pkg.github.com/:_authToken=${{ secrets.RELEASE_TOKEN }}
+
+      - name: Install Dependencies
+        uses: ./.github/actions/install-dependencies
+
+      - name: Generate New Release
+        run: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GIT_AUTHOR_NAME: ${{ secrets.RELEASE_USER }}
+          GIT_AUTHOR_EMAIL: ${{ secrets.RELEASE_USER_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ secrets.RELEASE_USER }}
+          GIT_COMMITTER_EMAIL: ${{ secrets.RELEASE_USER_EMAIL }}
