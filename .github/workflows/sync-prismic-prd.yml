@@ -10,17 +10,20 @@ on:
 jobs:
   sync-prismic-prd:
     name: Sync Prismic Production Environment
-    environment: production
+    # environment: production
     runs-on: centos-self-hosted
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Run Hello World
+        run: echo "Hello, World! This is a custom action."
 
-      - name: Install Dependencies
-        uses: ./.github/actions/install-dependencies
+      # - name: Checkout
+      #   uses: actions/checkout@v3
 
-      - name: Sync Prismic
-        uses: ./.github/actions/sync-prismic
-        with:
-          custom-types-api-token: ${{ secrets.CUSTOM_TYPES_API_TOKEN }}
-          prismic-repository: ${{ vars.PRISMIC_REPOSITORY }}
+      # - name: Install Dependencies
+      #   uses: ./.github/actions/install-dependencies
+
+      # - name: Sync Prismic
+      #   uses: ./.github/actions/sync-prismic
+      #   with:
+      #     custom-types-api-token: ${{ secrets.CUSTOM_TYPES_API_TOKEN }}
+      #     prismic-repository: ${{ vars.PRISMIC_REPOSITORY }}
