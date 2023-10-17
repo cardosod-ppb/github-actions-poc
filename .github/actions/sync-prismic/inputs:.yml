@@ -5,6 +5,7 @@ inputs:
   prismic-repository:
     description: Prismic Repository
     required: true
+
 name: Sync Prismic
 description: Sync Prismic
 runs:

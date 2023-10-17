@@ -9,6 +9,10 @@ jobs:
   release:
     name: Publish Release
     uses: ./.github/workflows/release.yml
+    with:
+      HELLO: ${{ vars.HELLO }}
+    secrets:
+      FOO: ${{ secrets.FOO }}
 
   sync-prismic-dev:
     name: Sync Prismic Development Environment
@@ -16,14 +20,9 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      # - name: Echo secret (sync)
+      #   run: |
+      #     echo "RELEASE_USER: ${{ secrets.FOO }}"
 
-      - name: Install Dependencies
-        uses: ./.github/actions/install-dependencies
-
-      - name: Sync Prismic
-        uses: ./.github/actions/sync-prismic
-        with:
-          custom-types-api-token: ${{ secrets.CUSTOM_TYPES_API_TOKEN }}
-          prismic-repository: ${{ vars.PRISMIC_REPOSITORY }}
+      - name: Sync Prismic Dev
+        run: echo "Sync prismic dev"
